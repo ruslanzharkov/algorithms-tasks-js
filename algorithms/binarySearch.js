@@ -4,15 +4,15 @@ function binarySearch(list, item) {
 
     while (low <= high) {
         let middle = Math.floor((low + high) / 2);
-        let guess = list[middle];
-        if (guess === item) {
+
+        if (list[middle] === item) {
             return middle;
         }
-        if (guess > item) {
+        if (list[middle] > item) {
             high = middle - 1;
         }
 
-        if (guess < item) {
+        if (list[middle] < item) {
             low = middle + 1
         }
     }
