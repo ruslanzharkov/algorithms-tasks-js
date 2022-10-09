@@ -6,9 +6,9 @@
  */
 function pipe(funcs) {
   return function(value) {
-		const res = funcs.reduce((acc, val) => {
-			return val(acc)
-		}, value);
-		return res;
-	}
+    const res = funcs.reduce((acc, val) => {
+      return val(acc)
+    }, value);
+    return res;
+  }
 }
