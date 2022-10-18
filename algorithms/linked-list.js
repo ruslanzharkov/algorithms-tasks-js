@@ -7,8 +7,7 @@
  */
 
 // reverse a linked list
-// recursion
-const reverseLinkedList = (list, prev = null) => {
+const reverseLinkedListRecursion = (list, prev = null) => {
   if (list === null) return prev;
 
   const temp = list.next;
@@ -19,7 +18,7 @@ const reverseLinkedList = (list, prev = null) => {
   return  reverseLinkedList(list, prev);
 }
 
-const reverseLinkedList = (list) => {
+const reverseLinkedListIterative = (list) => {
   let node = list;    
   let prev = null
 
