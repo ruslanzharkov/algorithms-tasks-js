@@ -15,7 +15,7 @@ const reverseLinkedListRecursion = (list, prev = null) => {
   prev = list;
   list = temp;
 
-  return  reverseLinkedList(list, prev);
+  return reverseLinkedListRecursion(list, prev);
 }
 
 const reverseLinkedListIterative = (list) => {
