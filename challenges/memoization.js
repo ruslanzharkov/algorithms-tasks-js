@@ -6,8 +6,7 @@ function memo(func, resolver) {
   const hashMap = {};
 
   return function(...args) {
-    const argsKey = args.join('_');
-    const resolveKey = typeof resolver === 'function' ? resolver.apply(this, args) : argsKey;
+    const resolveKey = typeof resolver === 'function' ? resolver.apply(this, args) : args.join('_');
 
     if (hashMap[resolveKey] !== undefined) {
       return hashMap[resolveKey];
