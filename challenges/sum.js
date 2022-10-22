@@ -1,7 +1,7 @@
 // via Symbol.toPrimitive
-function sumNewFeature(num) {
+function sumWithSymbol(num) {
   const func = (value) => {
-    return sum(num + value);
+    return sumWithSymbol(num + value);
   }
 
   func[Symbol.toPrimitive] = () => num;
@@ -10,9 +10,9 @@ function sumNewFeature(num) {
 }
 
 // via valueOf propertty of objects
-function sumOldWay(num) {
+function sumWithValueOf(num) {
   const func = (value) => {
-    return sum(num + value);
+    return sumWithValueOf(num + value);
   }
 
   func.valueOf = () => num;
