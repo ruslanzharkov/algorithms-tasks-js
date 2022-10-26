@@ -23,3 +23,33 @@ function throttle(func, wait) {
     }
   }
 }
+
+
+// approach 2
+
+function throttle2(func, wait) {
+  let isThrottled = false;
+  let savedArgs = null;
+  
+  function wrapper(...args) {
+    if (isThrottled) {
+      savedArgs = args;
+      return;
+    }
+
+    func.apply(this, args);
+    isThrottled = true;
+
+    setTimeout(() => {
+      isThrottled = false;
+
+      if (savedArgs) {
+        wrapper.apply(this, savedArgs);
+        savedArgs = null
+      }
+    }, wait);
+
+  }
+
+  return wrapper;
+}
