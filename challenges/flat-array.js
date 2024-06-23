@@ -11,12 +11,12 @@ function flat(arr, depth = 1) {
 
 // recursive
 
-function flat(arr, depth = 1) {
-  return arr.reduce((acc, curr) => {
-    if(Array.isArray(curr) && depth > 0) {
-      acc.push(...flat(curr, depth - 1));
+function flat(arr, depth = 1) { 
+  return arr.reduce((acc, val) => {
+    if (Array.isArray(val) && depth >= 1) {
+      acc = flat(acc.concat(val), depth - 1)
     } else {
-      acc.push(curr);
+      acc.push(val)
     }
     return acc;
   }, []);
