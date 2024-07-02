@@ -1,24 +1,26 @@
-(function() {
-  const windowSetTimeout = window.setTimeout
-  window.setTimeout = function (...args) {
-  const timeout = windowSetTimeout.apply(this, args)
+
+const windowSetTimeout = window.setTimeout
+const windowClearTimeout = window.clearTimeout
+const timersMap = {}
+
+window.setTimeout = function (...args) {
+  const timer = windowSetTimeout.apply(this, args)
+  timersMap[timer] = timer // // adding a new timer takes O(1) time since it's hashmap
   
-  if (Array.isArray(window.timeouts)) {
-    window.timeouts.push(timeout)
-  } else {
-    window.timeouts = [timeout]
-  }
-
-  return timeout
+  return timer
 }
-})()
 
+window.clearTimeout = function (timer) {
+  windowClearTimeout.call(this, timer)
+  delete timersMap[timer] // removal takes O(1) time since it's hashmap
+}
 
 /**
  * cancel all timer from window.setTimeout
  */
 function clearAllTimeout() {
- (window.timeouts || []).forEach((timerId) => {
-  clearTimeout(timerId)
+  // clearing all timout takes O(N), where N = all timeouts
+ (Object.values(timersMap)).forEach((timerId) => {
+  window.clearTimeout(timerId)
  })
 }
