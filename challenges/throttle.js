@@ -25,31 +25,32 @@ function throttle(func, wait) {
 }
 
 
-// approach 2
+// approach 2 recursive function
+function throttle2(fn, t) {
+  let savedArgs = null
+    let isThrottling = false
 
-function throttle2(func, wait) {
-  let isThrottled = false;
-  let savedArgs = null;
-  
-  function wrapper(...args) {
-    if (isThrottled) {
-      savedArgs = args;
-      return;
+    const setTimer = () => {
+        setTimeout(() => {
+            isThrottling = false
+            if (savedArgs) {
+                fn.apply(this, savedArgs)
+                savedArgs = null
+                isThrottling = true
+                setTimer()
+            }
+        }, t)
     }
 
-    func.apply(this, args);
-    isThrottled = true;
+    return function(...args) {
+        if (!isThrottling) {
+            fn.apply(this, args)
+            isThrottling = true
+        } else {
+            savedArgs = args
+            return
+        }
 
-    setTimeout(() => {
-      isThrottled = false;
-
-      if (savedArgs) {
-        wrapper.apply(this, savedArgs);
-        savedArgs = null
-      }
-    }, wait);
-
-  }
-
-  return wrapper;
+        setTimer()
+    }
 }
