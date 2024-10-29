@@ -4,6 +4,11 @@
  */
 var promiseAll = function (functions) {
     return new Promise((res, rej) => {
+        if (functions.length === 0) {
+            resolve([]);
+            return;
+        }
+
         const arr = new Array(functions.length)
         let resolvedCount = 0
 
