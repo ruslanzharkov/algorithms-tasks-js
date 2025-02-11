@@ -1,6 +1,6 @@
 
 /**
-* This functions uses Bidirectional product accumulation approach, first we mutliple items by shifting array to 1 position further
+* This functions uses Bidirectional product accumulation approach, first we mutliply items by shifting array to 1 position further form left to right
 * then we traverse array again from right to left with the same shift not including current item element
 */
 function productExceptSelf(nums: number[]): number[] {
